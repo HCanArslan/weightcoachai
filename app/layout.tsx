@@ -7,7 +7,7 @@ import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@c
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Weightcoachai - Healthier You",
+  title: "Weightaicoach - Healthier You",
   description: "AI powered Nutrition plan",
 };
 
