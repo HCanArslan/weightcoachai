@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { useSpring, animated } from '@react-spring/web';
 import { Button } from './ui/button';
 
 interface FAQItem {
@@ -38,11 +37,6 @@ const FAQ: React.FC = () => {
         <div className="space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
-            const animation = useSpring({
-              opacity: isOpen ? 1 : 0,
-              maxHeight: isOpen ? 200 : 0, // Adjust maxHeight as needed
-              config: { duration: 200 },
-            });
 
             return (
               <div key={index} className="border-b border-gray-300 pb-4">
@@ -53,9 +47,13 @@ const FAQ: React.FC = () => {
                   {faq.question}
                   <FontAwesomeIcon icon={isOpen ? faChevronUp : faChevronDown} />
                 </Button>
-                <animated.div style={animation} className="overflow-hidden mt-2 px-5 py-2 text-bodyText">
-                  {isOpen && <div>{faq.answer}</div>}
-                </animated.div>
+                <div
+                  className={`transition-[max-height] duration-500 ease-in-out overflow-hidden ${
+                    isOpen ? 'max-h-96' : 'max-h-0'
+                  } mt-2 px-5 py-2 text-bodyText`}
+                >
+                  {faq.answer}
+                </div>
               </div>
             );
           })}
